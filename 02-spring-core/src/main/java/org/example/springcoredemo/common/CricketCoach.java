@@ -12,15 +12,15 @@ public class CricketCoach implements Coach {
         System.out.println("CricketCoach constructor");
     }
 
-    @PostConstruct
-    public void init(){
-        System.out.println("CricketCoach init method");
-    }
-
-    @PreDestroy
-    public void destroy(){
-        System.out.println("CricketCoach destroy method");
-    }
+//    @PostConstruct
+//    public void init(){
+//        System.out.println("CricketCoach init method");
+//    }
+//
+//    @PreDestroy
+//    public void destroy(){
+//        System.out.println("CricketCoach destroy method");
+//    }
 
     @Override
     public String getDailyWorkout() {
