@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 //@Lazy
 public class BaseballCoach implements Coach{
     public BaseballCoach(){
-        //System.out.println("BaseballCoach constructor");
+        System.out.println("BaseballCoach constructor");
     }
     @Override
     public String getDailyWorkout() {
