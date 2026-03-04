@@ -1,43 +1,51 @@
 package com.dylangk.springboot.cruddemo.services;
 
-import com.dylangk.springboot.cruddemo.dao.EmployeeDAO;
+import com.dylangk.springboot.cruddemo.dao.EmployeeRepository;
 import com.dylangk.springboot.cruddemo.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeServicesImpl implements EmployeeServices{
 
-    private EmployeeDAO employeeDAO;
+    private EmployeeRepository employeeRepository;
 
     @Autowired
-    public EmployeeServicesImpl(EmployeeDAO employeeDAO) {
-        this.employeeDAO = employeeDAO;
+    public EmployeeServicesImpl(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
     @Override
     public List<Employee> findAll() {
-        return employeeDAO.findAll();
+        return employeeRepository.findAll();
     }
 
     @Override
     public Employee findById(int id) {
-        return employeeDAO.findById(id);
+        Optional<Employee> result = employeeRepository.findById(id);
+        Employee theEmployee = null;
+
+        if (result.isPresent()) {
+            theEmployee = result.get();
+        }
+        else{
+            throw new RuntimeException("Employee not found - " + id);
+        }
+        return theEmployee;
     }
 
     @Override
-    @Transactional
     public Employee save(Employee employee) {
-        return employeeDAO.save(employee);
+        return employeeRepository.save(employee);
     }
 
     @Override
-    @Transactional
     public void deleteById(int id) {
-        employeeDAO.deleteById(id);
+        employeeRepository.deleteById(id);
     }
 
 
